@@ -1,0 +1,73 @@
+<div class="container">
+   
+    
+  
+  <div class="row">
+
+    <div class="col-auto"> 
+      <button type="button" class="btn btn-success" (click)="saveWorks()">
+        
+        <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status"></span>
+        Save works
+      </button></div>
+    <div class="col" style="text-align: center;">
+      <h1>Иванов Иван</h1>    
+    </div>
+    <div class="col-auto"><button type="button" class="btn btn-danger" (click)="logout()">Logout</button></div>
+    <div class="w-100"></div>
+    <div class="col-auto"><button type="button" class="btn btn-primary" (click)="prevWeek()">Prev</button></div>
+    <div class="col" style="text-align: center;">
+      <h3>{{week.start_date | date:'dd.MM'}} - {{week.end_date | date:'dd.MM'}}</h3>
+    </div>
+    <div class="col-auto"><button type="button" class="btn btn-primary" (click)="nextWeek()">Next</button></div>
+  </div>
+  
+    <!-- <div class="row">
+      <div class="col-4"></div>
+      <div class="col-1">Пн</div>
+      <div class="col-1">Вт</div>
+      <div class="col-1">Ср</div>
+      <div class="col-1">Чт</div>
+      <div class="col-1">Пт</div>
+      <div class="col-1">Сб</div>
+      <div class="col-1">Вс</div>
+      <div class="col-1"></div>
+    </div>
+    <div class="row" *ngFor="let weekLine of week.week_lines; let i = index">
+      <div class="col-4">{{ week.week_lines[i].activity_name }}</div>
+  
+      <div class="col-1" *ngFor="let day of weekLine.week_data; let j = index; trackBy:trackByIndex;">
+        <input class="form-check-input" type="checkbox" [(ngModel)]="week.week_lines[i].week_data[j]">
+      </div>
+  
+      <div class="col-1"></div>
+    </div> -->
+
+    <table class="table table-light table-striped">
+      <thead>
+        <tr>
+        <th></th>
+        <th>Пн</th>
+        <th>Вт</th>
+        <th>Ср</th>
+        <th>Чт</th>
+        <th>Пт</th>
+        <th>Сб</th>
+        <th>Вс</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let weekLine of week.week_lines; let i = index">
+          <td>{{ week.week_lines[i].activity_name }}</td>
+      
+          <td *ngFor="let day of weekLine.week_data; let j = index; trackBy:trackByIndex;">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="week.week_lines[i].week_data[j]">
+          </td>
+      
+        </tr>
+      </tbody>
+    </table>
+    
+</div>
+  
+  

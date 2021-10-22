@@ -1,0 +1,34 @@
+<div class="container">
+
+    <form [formGroup]="RankForm" (ngSubmit)="getRank()">
+        <div class="input-group mb-3">
+            <input type="date" class="form-control" formControlName = "start_date">
+          </div>
+          <div class="input-group mb-3">
+            <input type="date" class="form-control" formControlName = "end_date">
+          </div>
+        <div class="form-group">
+            <input type="submit" value="Go" class="btn btn-primary">
+        </div>
+    </form>
+    
+            
+<table class="table table-light table-striped">
+    <thead>
+      <tr>
+      <th class="rotated-text" scope="col"><div><span>Name</span></div></th>
+      <th class="rotated-text" scope="col" *ngFor="let activity of activities"><div><span>{{ activity.name }}</span></div></th>
+      <th class="rotated-text" scope="col"><div><span>Points</span></div></th>      
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; let i = index">
+        <td>{{ user.name }}</td>
+        <td *ngFor="let activity of activities">
+            {{ user[activity.name] }}
+        </td>
+        <td>{{ user.points }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
