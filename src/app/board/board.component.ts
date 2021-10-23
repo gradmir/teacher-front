@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SwPush } from '@angular/service-worker';
 import { Subscription } from 'rxjs';
 import { ActivitiesApiService } from '../Acitivities/activities-api.service';
 import { AuthApiService } from '../Auth/auth-api.service';
@@ -15,6 +16,7 @@ import { WorksApiService } from '../Works/works-api.service';
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit {
+  readonly VAPID_PUBLIC_KEY = "BEFv0LWfGe9QYxnKmh4vSwXZn0UCiCS4VwOy44cRPrhbfG5sqbAZTY1huECnTTBtzjeXcBsiqBVl1RWyUrEtnDk";
 
   title = 'frontend';
   loading = false;
@@ -34,8 +36,21 @@ export class BoardComponent implements OnInit {
     private authService: AuthApiService,
     private worksService: WorksApiService,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private swPush: SwPush,
+    //private newsletterService: NewsletterService
+    ) {
   }
+
+  subscribeToNotifications() {
+
+    this.swPush.requestSubscription({
+        serverPublicKey: this.VAPID_PUBLIC_KEY
+    })
+    .then(sub => console.log(sub))//this.newsletterService.addPushSubscriber(sub).subscribe())
+    .catch(err => console.error("Could not subscribe to notifications", err));
+  }
+  
   ngOnInit() {
     let today: Date = new Date(Date.now());
     let day = today.getDay();

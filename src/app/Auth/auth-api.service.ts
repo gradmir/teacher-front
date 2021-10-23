@@ -6,7 +6,8 @@ import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class AuthApiService {
-  private headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+  private headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json', 
+  'Access-Control-Allow-Origin': '*'});
 
   constructor(private http: HttpClient) {
   }

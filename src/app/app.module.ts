@@ -13,6 +13,8 @@ import { LoginComponent } from './login/login.component';
 import { Router, RouterModule } from '@angular/router';
 import { BoardComponent } from './board/board.component';
 import { RankComponent } from './rank/rank.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,13 @@ import { RankComponent } from './rank/rank.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: true,//environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [ClassesApiService, ActivitiesApiService, AuthApiService, WorksApiService],
   bootstrap: [AppComponent]
