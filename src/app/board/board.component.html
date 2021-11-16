@@ -1,7 +1,5 @@
 <div class="container">
-  <button class="button button-primary" (click)="subscribeToNotifications()">
-    Subscribe
-  </button>
+  
     
   
   <div class="row">
@@ -69,7 +67,12 @@
         </tr>
       </tbody>
     </table>
-    
+    <button *ngIf="!(isSubscribed | async)" class="btn btn-warning" (click)="subscribeToNotifications()">
+      Subscribe
+    </button>
+    <button *ngIf="isSubscribed | async" class="btn btn-warning" (click)="unsubscribeNotifications()">
+      Unubscribe
+    </button>
 </div>
   
   
